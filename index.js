@@ -1,5 +1,6 @@
 const root = document.getElementById("root");
 
+
 // Create the calculator container
 const calculator = document.createElement("div");
 calculator.classList.add("calculator");
@@ -26,13 +27,14 @@ buttons.forEach((label, index) => {
   button.classList.add("calculator-button");
 
   // Special styling for the stretched "0" button
-  if (label === "0" && (index === 16 || index === 17)) {
+  if (label === "0" && (index === 16)) {
     button.classList.add("button-wide");
   }
 
   button.textContent = label;
   buttonContainer.appendChild(button);
 });
+
 
 // Append everything to the root container
 calculator.appendChild(buttonContainer);
