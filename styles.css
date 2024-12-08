@@ -1,5 +1,5 @@
 body {
-    background-color: aqua;
+    background-color: moccasin;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,7 +21,6 @@ body {
 .calculator-display {
     width: 100%;
     height: 50px;
-    border: 3px solid blue;
     display: flex;
     align-items: center;
     justify-content: flex-end; /* Align text to the right */
@@ -29,12 +28,13 @@ body {
     padding: 0 10px;
     box-sizing: border-box;
     background-color: white;
+    color: black;
 }
 
 .calculator-buttons {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
-    border: 3px solid yellow;
     width: 100%;
 }
 
@@ -58,5 +58,5 @@ button:hover {
 }
 
 .button-wide {
-    width: 168px; /* Spans two columns */
+    width: 169px; /* Spans two columns */
 }
