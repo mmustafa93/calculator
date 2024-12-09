@@ -5,6 +5,7 @@ const root = document.getElementById("root");
 let currentInput = "0"; // Current number being input
 let storedValue = null; // Previous number stored for operations
 let operator = null; // Current operator
+let isDarkMode = true; // Toggle state for light/dark mode
 
 // Button labels for the calculator
 const buttons = [
@@ -25,6 +26,18 @@ const createElement = (tag, classes = [], text = "") => {
 
 // Build the calculator
 const calculator = createElement("div", ["calculator"]);
+
+// Toggle dark/light mode
+const toggleDarkMode = () => {
+    isDarkMode = !isDarkMode;
+    document.body.classList.toggle("light-mode", !isDarkMode);
+  };
+
+
+// Add the toggle button
+const toggleButton = createElement("button", ["toggle-mode"], "");
+toggleButton.addEventListener("click", toggleDarkMode);
+calculator.appendChild(toggleButton);
 
 // Create and append the display
 const display = createElement("div", ["calculator-display"]);
@@ -107,18 +120,21 @@ const handleButtonClick = (label) => {
   };
   
 
+
+
 // Create and append the button grid
 const buttonContainer = createElement("div", ["calculator-buttons"]);
 buttons.forEach((label, index) => {
   const buttonClasses = ["calculator-button"];
   if (label === "0" && index === 16) buttonClasses.push("button-wide");
+  if (["AC", "+/-", "%"].includes(label)) buttonClasses.push("function");
+  if (["+", "-", "*", "/", "="].includes(label)) buttonClasses.push("operand");
   const button = createElement("button", buttonClasses, label);
   // Attach click event to each button
   button.addEventListener("click", () => handleButtonClick(label));
   buttonContainer.appendChild(button);
 });
 calculator.appendChild(buttonContainer);
-
 
 
 // Add calculator to the root element

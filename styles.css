@@ -1,62 +1,142 @@
+/* Base styles */
 body {
-    background-color: moccasin;
+    margin: 0;
+    font-family: Roboto, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Ensures it takes the full viewport height */
-    margin: 0;
-}
-
-#root {
-    background-color: azure;
-    width: 350px;
+    height: 100vh;
+    background-color: #121212; /* Default to dark mode */
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  body.light-mode {
+    background-color: #f4f4f4;
+    color: black;
+  }
+  
+  /* Calculator container */
+  .calculator {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    width: 300px;
+    background: #1e1e1e;
+    padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-}
-
-.calculator-display {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end; /* Align text to the right */
-    font-size: 1.5em;
-    padding: 0 10px;
-    box-sizing: border-box;
-    background-color: white;
-    color: black;
-}
-
-.calculator-buttons {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
-button {
-    margin: 1px;
-    width: 84px;
-    height: 60px;
-    border-radius: 5%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  body.light-mode .calculator {
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Display */
+  .calculator-display {
+    width: 90%;
+    height: auto;
+    background: #2d2d2d;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 2rem;
+    text-align: right;
+    margin-bottom: 20px;
+    overflow: hidden; /* Hide any overflowing content */
+    text-overflow: ellipsis; /* Display an ellipsis for overflowing text */
+    white-space: nowrap; /* Prevent text from wrapping */
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  body.light-mode .calculator-display {
+    background: #f0f0f0;
+  }
+  
+  /* Buttons container */
+  .calculator-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  
+  /* General button styles */
+  .calculator-button {
+    padding: 20px;
+    font-size: 1.2rem;
     border: none;
-    font-weight: bold;
-    font-size: 1.2em;
-    font-family: monospace;
-    color: black;
+    border-radius: 5px;
     cursor: pointer;
-    background-color: lightgray;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: gray;
-}
-
-.button-wide {
-    width: 169px; /* Spans two columns */
-}
+    transition: background 0.3s, transform 0.2s ease;
+  }
+  
+  .calculator-button:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Digits and decimal point */
+  .calculator-button.digit {
+    color: white;
+    background: #3a3a3a;
+  }
+  
+  body.light-mode .calculator-button.digit {
+    color: black;
+    background: #e0e0e0;
+  }
+  
+  /* Operands (+, -, *, /, =) */
+  .calculator-button.operand {
+    color: #e67e22; /* Orange shade */
+  }
+  
+  body.light-mode .calculator-button.operand {
+    background: #e0e0e0;
+  }
+  
+  /* Functional buttons (A/C, +/- and %) */
+  .calculator-button.function {
+    color: #27ae60; /* Green shade */
+  }
+  
+  body.light-mode .calculator-button.function {
+    background: #e0e0e0;
+  }
+  
+  /* Wide button for "0" */
+  .button-wide {
+    grid-column: span 2;
+  }
+  
+  /* Toggle mode button */
+  .toggle-mode {
+    position: relative;
+    align-self: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Sun and Moon animation */
+  .toggle-mode::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--toggle-icon); /* Dynamic color */
+    mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M12 3a9 9 0 100 18 9 9 0 000-18zm0 16.2a7.2 7.2 0 110-14.4 7.2 7.2 0 010 14.4z"/></svg>') no-repeat center;
+    -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M12 3a9 9 0 100 18 9 9 0 000-18zm0 16.2a7.2 7.2 0 110-14.4 7.2 7.2 0 010 14.4z"/></svg>') no-repeat center;
+    background-size: contain;
+    transition: background-color 0.5s ease, transform 0.5s ease;
+  }
+  
+  body.light-mode .toggle-mode::before {
+    background-color: #f39c12; /* Sun color */
+  }
+  
+  body:not(.light-mode) .toggle-mode::before {
+    background-color: #34495e; /* Moon color */
+  }
